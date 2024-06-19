@@ -5,4 +5,9 @@ enum class Direction(val value: Char) {
     EAST('E'),
     SOUTH('S'),
     WEST('W');
+
+    companion object {
+        @JvmStatic
+        fun fromValue(value: Char): Direction = entries.first { it.value == value }
+    }
 }

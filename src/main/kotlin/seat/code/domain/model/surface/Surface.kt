@@ -19,6 +19,8 @@ class Surface private constructor(
 
     fun mowers() = mowers.keys.toList()
 
+    fun mowersWithCommands() = mowers.toMap()
+
     fun placeMower(mower: Mower, instructions: String) {
         if (!hasValidPosition(mower)) {
             throw InvalidMowerPositionException()
