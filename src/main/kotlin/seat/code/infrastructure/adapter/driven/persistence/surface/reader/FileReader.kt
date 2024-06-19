@@ -1,5 +1,6 @@
 package seat.code.infrastructure.adapter.driven.persistence.surface.reader
 
+import jakarta.inject.Inject
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception.ConfigurationFileNotFoundException
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception.EmptyConfigurationFileException
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception.InvalidConfigurationFileException
@@ -8,7 +9,7 @@ import java.io.IOException
 import java.io.InputStreamReader
 import java.nio.charset.StandardCharsets
 
-class FileReader(
+class FileReader @Inject constructor(
     private val fileConfiguration: FileConfiguration,
     private val validator: InputCommandValidator
 ) {

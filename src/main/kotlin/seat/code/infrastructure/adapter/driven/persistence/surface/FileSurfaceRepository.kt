@@ -1,5 +1,6 @@
 package seat.code.infrastructure.adapter.driven.persistence.surface
 
+import jakarta.inject.Inject
 import seat.code.domain.model.mower.Coordinate
 import seat.code.domain.model.mower.Direction
 import seat.code.domain.model.mower.Mower
@@ -9,7 +10,7 @@ import seat.code.domain.model.surface.Width
 import seat.code.domain.repository.surface.SurfaceRepository
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.FileReader
 
-class FileSurfaceRepository(private val fileReader: FileReader) : SurfaceRepository {
+class FileSurfaceRepository @Inject constructor(private val fileReader: FileReader) : SurfaceRepository {
 
     override fun get(): Surface {
         val (width, height) = fileReader.getSurfaceDimension()
