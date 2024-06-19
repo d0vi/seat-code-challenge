@@ -2,6 +2,15 @@
 
 Cutting grass never felt so easy 🫢️
 
+### ➡️ Requirements
+
+In order to run this application, a valid JDK 21 version must be present in your system.
+
+Use [SDKMAN!](https://sdkman.io/) to install the Eclipse Temurin JDK:
+```
+sdk install java 21.0.3-tem
+```
+
 ### 🏃🏻‍♂️ Run the application
 
 Open a new terminal and execute:
