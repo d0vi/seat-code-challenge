@@ -1,4 +1,5 @@
 plugins {
+    application
     kotlin("jvm") version "2.0.0"
 }
 
@@ -26,4 +27,8 @@ testing {
             }
         }
     }
+}
+
+application {
+    mainClass = "seat.code.ApplicationKt"
 }
