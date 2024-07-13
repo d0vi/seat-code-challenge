@@ -2,7 +2,6 @@ package seat.code.infrastructure.framework.configuration
 
 import com.google.inject.AbstractModule
 import com.google.inject.Provides
-import jakarta.inject.Singleton
 import seat.code.domain.repository.surface.SurfaceRepository
 import seat.code.infrastructure.adapter.driven.persistence.surface.FileSurfaceRepository
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.FileConfiguration
@@ -13,7 +12,6 @@ import java.util.Properties
 
 class RepositoryModule : AbstractModule() {
 
-    @Singleton
     @Provides
     fun provideSurfaceRepository(fileReader: FileReader): SurfaceRepository = FileSurfaceRepository(fileReader)
 
