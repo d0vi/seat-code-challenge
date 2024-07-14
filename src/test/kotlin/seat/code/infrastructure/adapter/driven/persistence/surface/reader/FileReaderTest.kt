@@ -11,6 +11,7 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception.ConfigurationFileNotFoundException
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception.InvalidConfigurationFileException
+import java.nio.file.Path
 
 @ExtendWith(MockitoExtension::class)
 class FileReaderTest {
@@ -48,6 +49,7 @@ class FileReaderTest {
     @Test
     fun `should throw exception when the file does not exist`() {
         `when`(fileConfiguration.name()).thenReturn("foo")
+        `when`(fileConfiguration.path()).thenReturn(Path.of("foo"))
         assertThrows<ConfigurationFileNotFoundException> {
             fileReader.getSurfaceDimension()
         }

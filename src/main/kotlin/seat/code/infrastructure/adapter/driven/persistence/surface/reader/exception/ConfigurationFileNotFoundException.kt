@@ -1,3 +1,5 @@
 package seat.code.infrastructure.adapter.driven.persistence.surface.reader.exception
 
-class ConfigurationFileNotFoundException : RuntimeException()
+import java.nio.file.Path
+
+class ConfigurationFileNotFoundException(path: Path) : RuntimeException("File $path could not be found")

@@ -49,7 +49,7 @@ class FileReader @Inject constructor(
     // pretty obscure method, this is what needs to be done in order to read from classpath's resources folder
     private fun readFile(): List<String> {
         val `is` = javaClass.classLoader.getResourceAsStream(fileConfiguration.name())
-            ?: throw ConfigurationFileNotFoundException()
+            ?: throw ConfigurationFileNotFoundException(fileConfiguration.path())
         val lines = try {
             InputStreamReader(`is`, StandardCharsets.UTF_8).use { streamReader ->
                 BufferedReader(streamReader).lines().toList()
@@ -67,7 +67,7 @@ class FileReader @Inject constructor(
         if (lines.isEmpty()) {
             throw EmptyConfigurationFileException()
         }
-        // returns true if the file has:
+        // returns true if the file has at least:
         // - one surface configuration
         // - one mower configuration (including mower commands)
         return lines.size >= 3 && lines.size % 2 == 1
