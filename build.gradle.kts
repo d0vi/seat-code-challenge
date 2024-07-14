@@ -32,7 +32,26 @@ testing {
                 implementation("org.mockito:mockito-junit-jupiter:5.12.0")
             }
         }
+
+        val e2e by registering(JvmTestSuite::class) {
+            dependencies {
+                implementation(project())
+                implementation("com.google.inject:guice:7.0.0")
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
     }
+}
+
+tasks.check {
+    dependsOn(testing.suites.named("e2e"))
 }
 
 application {
