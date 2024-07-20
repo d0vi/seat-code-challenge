@@ -7,15 +7,13 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import seat.code.domain.exception.surface.InvalidMowerPositionException
 import seat.code.domain.exception.surface.NoAvailableMowersException
-import seat.code.domain.model.mower.Coordinate
-import seat.code.domain.model.mower.Direction
 import seat.code.domain.model.mower.Mower
 
 class SurfaceTest {
 
     @Test
     fun `should instantiate a surface`() {
-        val surface = Surface(Width(5), Height(5))
+        val surface = Surface(5, 5)
         assertNotNull(surface)
         assertEquals(surface.width(), 5)
         assertEquals(surface.height(), 5)
@@ -24,33 +22,33 @@ class SurfaceTest {
 
     @Test
     fun `should place a mower`() {
-        val surface = Surface(Width(5), Height(5))
-        surface.placeMower(Mower(Coordinate(0), Coordinate(4), Direction.SOUTH), "FOO")
+        val surface = Surface(5, 5)
+        surface.placeMower(Mower(0, 4, 'S'), "FOO")
         assertTrue(surface.mowers().isNotEmpty())
     }
 
     @Test
     fun `should throw exception when placing a mower outside the surface`() {
-        val surface = Surface(Width(5), Height(5))
+        val surface = Surface(5, 5)
         assertThrows<InvalidMowerPositionException> {
-            surface.placeMower(Mower(Coordinate(8), Coordinate(4), Direction.SOUTH), "FOO")
+            surface.placeMower(Mower(8, 4, 'S'), "FOO")
         }
     }
 
     @Test
     fun `should instruct mowers to cut grass`() {
-        val surface = Surface(Width(5), Height(5))
-        surface.placeMower(Mower(Coordinate(1), Coordinate(2), Direction.NORTH), "LMLMLMLMM")
+        val surface = Surface(5, 5)
+        surface.placeMower(Mower(1, 2, 'N'), "LMLMLMLMM")
         surface.cutGrass()
         val mower = surface.mowers().first()
         assertEquals(mower.xCoordinate(), 1)
         assertEquals(mower.yCoordinate(), 3)
-        assertEquals(mower.direction(), Direction.NORTH)
+        assertEquals(mower.direction(), 'N')
     }
 
     @Test
     fun `should throw exception when there are no available mowers to cut grass`() {
-        val surface = Surface(Width(5), Height(5))
+        val surface = Surface(5, 5)
         assertThrows<NoAvailableMowersException> {
             surface.cutGrass()
         }

@@ -6,7 +6,6 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
-import seat.code.domain.model.mower.Direction
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.FileReader
 import kotlin.test.assertEquals
 
@@ -31,7 +30,7 @@ class FileSurfaceRepositoryTest {
         assertEquals(SURFACE_HEIGHT, surface.height())
         assertEquals(MOWER_X, surface.mowers().first().xCoordinate())
         assertEquals(MOWER_Y, surface.mowers().first().yCoordinate())
-        assertEquals(Direction.fromValue(MOWER_DIRECTION), surface.mowers().first().direction())
+        assertEquals(MOWER_DIRECTION, surface.mowers().first().direction())
         assertEquals(MOWER_COMMANDS, surface.mowersWithCommands().entries.first().value)
     }
 

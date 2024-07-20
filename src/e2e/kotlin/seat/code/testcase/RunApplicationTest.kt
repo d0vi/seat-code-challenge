@@ -8,7 +8,6 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import seat.code.application.ConfigureSurfaceUseCase
 import seat.code.application.RunMowersUseCase
-import seat.code.domain.model.mower.Direction
 import seat.code.infrastructure.framework.configuration.RepositoryModule
 import seat.code.infrastructure.framework.configuration.UseCaseModule
 
@@ -34,6 +33,6 @@ class RunApplicationTest {
         val mower = surface.mowers().first()
         assertEquals(5, mower.xCoordinate())
         assertEquals(1, mower.yCoordinate())
-        assertEquals(Direction.EAST, mower.direction())
+        assertEquals('E', mower.direction())
     }
 }

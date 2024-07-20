@@ -3,22 +3,28 @@ package seat.code.domain.model.mower
 import seat.code.domain.exception.mower.InvalidMowerDirectionException
 import seat.code.domain.exception.mower.MowerPositionOutOfBoundsException
 
-class Mower(
+class Mower private constructor(
     private var xCoordinate: Coordinate,
     private var yCoordinate: Coordinate,
     private var direction: Direction
 ) {
 
+    constructor(xCoordinate: Int, yCoordinate: Int, direction: Char) : this(
+        Coordinate(xCoordinate),
+        Coordinate(yCoordinate),
+        Direction.fromValue(direction)
+    )
+
     fun xCoordinate() = xCoordinate.value
 
     fun yCoordinate() = yCoordinate.value
 
-    fun direction() = direction
+    fun direction() = direction.value
 
     override fun toString(): String = "${xCoordinate.value} ${yCoordinate.value} ${direction.value}"
 
-    fun move(command: Command, maxX: Int, maxY: Int) {
-        when (command) {
+    fun move(command: Char, maxX: Int, maxY: Int) {
+        when (Command.fromValue(command)) {
             Command.TURN_LEFT -> turnLeft()
             Command.TURN_RIGHT -> turnRight()
             Command.GO_FORWARD -> goForward(maxX, maxY)

@@ -14,39 +14,39 @@ class MowerTest {
 
     @Test
     fun `should instantiate a mower`() {
-        val mower = Mower(Coordinate(1), Coordinate(2), Direction.NORTH)
+        val mower = Mower(1, 2, 'N')
         assertNotNull(mower)
         assertEquals(mower.xCoordinate(), 1)
         assertEquals(mower.yCoordinate(), 2)
-        assertEquals(mower.direction(), Direction.NORTH)
+        assertEquals(mower.direction(), 'N')
     }
 
     @Test
     fun `should print a good toString`() {
-        val mower = Mower(Coordinate(1), Coordinate(2), Direction.NORTH)
+        val mower = Mower(1, 2, 'N')
         assertEquals(mower.toString(), "1 2 N")
     }
 
     @ParameterizedTest
     @MethodSource("getMowerDirectionsWithTurnCommands")
-    fun `should turn accordingly`(initialDirection: Direction, command: Command, finalDirection: Direction) {
-        val mower = Mower(Coordinate(5), Coordinate(5), initialDirection)
+    fun `should turn accordingly`(initialDirection: Char, command: Char, finalDirection: Char) {
+        val mower = Mower(5, 5, initialDirection)
         mower.move(command, SURFACE_WIDTH, SURFACE_HEIGHT)
         assertEquals(mower.direction(), finalDirection)
     }
 
     @ParameterizedTest
     @MethodSource("getMowersWithForwardCommands")
-    fun `should go forward accordingly`(initialMower: Mower, command: Command, finalMower: Mower) {
+    fun `should go forward accordingly`(initialMower: Mower, command: Char, finalMower: Mower) {
         initialMower.move(command, SURFACE_WIDTH, SURFACE_HEIGHT)
         assertEquals(initialMower.toString(), finalMower.toString())
     }
 
     @Test
     fun `should throw exception when moving out of the surface bounds`() {
-        val mower = Mower(Coordinate(0), Coordinate(0), Direction.SOUTH)
+        val mower = Mower(0, 0, 'S')
         assertThrows<MowerPositionOutOfBoundsException> {
-            mower.move(Command.GO_FORWARD, SURFACE_WIDTH, SURFACE_HEIGHT)
+            mower.move('M', SURFACE_WIDTH, SURFACE_HEIGHT)
         }
     }
 
@@ -58,14 +58,14 @@ class MowerTest {
         private fun getMowerDirectionsWithTurnCommands(): Stream<Arguments> =
             Stream.of(
                 Arguments.of(
-                    Direction.NORTH,
-                    Command.TURN_RIGHT,
-                    Direction.EAST
+                    'N',
+                    'R',
+                    'E'
                 ),
                 Arguments.of(
-                    Direction.EAST,
-                    Command.TURN_RIGHT,
-                    Direction.SOUTH
+                    'E',
+                    'R',
+                    'S'
                 ),
                 // rest of cases omitted for simplicity's sake
             )
@@ -74,14 +74,14 @@ class MowerTest {
         private fun getMowersWithForwardCommands(): Stream<Arguments> =
             Stream.of(
                 Arguments.of(
-                    Mower(Coordinate(5), Coordinate(5), Direction.NORTH),
-                    Command.GO_FORWARD,
-                    Mower(Coordinate(5), Coordinate(6), Direction.NORTH)
+                    Mower(5, 5, 'N'),
+                    'M',
+                    Mower(5, 6, 'N')
                 ),
                 Arguments.of(
-                    Mower(Coordinate(5), Coordinate(5), Direction.EAST),
-                    Command.GO_FORWARD,
-                    Mower(Coordinate(6), Coordinate(5), Direction.EAST)
+                    Mower(5, 5, 'E'),
+                    'M',
+                    Mower(6, 5, 'E')
                 ),
                 // rest of cases omitted for simplicity's sake
             )

@@ -11,7 +11,7 @@ class Surface private constructor(
     private val mowers: MutableMap<Mower, String>
 ) {
 
-    constructor(width: Width, height: Height) : this(width, height, mutableMapOf())
+    constructor(width: Int, height: Int) : this(Width(width), Height(height), mutableMapOf())
 
     fun width() = width.value
 
@@ -32,10 +32,10 @@ class Surface private constructor(
         if (mowers.isEmpty()) {
             throw NoAvailableMowersException()
         }
-        mowers.forEach {
-            (mower, commands) -> commands.forEach {
+        mowers.forEach { (mower, commands) ->
+            commands.forEach {
                 mower.move(
-                    command = Command.fromValue(it),
+                    command = it,
                     maxX = width.value,
                     maxY = height.value
                 )
