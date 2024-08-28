@@ -28,7 +28,7 @@ testing {
             useJUnitJupiter()
 
             dependencies {
-                implementation("org.mockito:mockito-core:5.12.0")
+                implementation("org.mockito:mockito-core:5.13.0")
                 implementation("org.mockito:mockito-junit-jupiter:5.12.0")
             }
         }
