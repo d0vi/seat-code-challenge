@@ -1,3 +1,5 @@
+[![Build status](https://github.com/d0vi/seat-code-challenge/workflows/CI/badge.svg)](https://github.com/d0vi/seat-code-challenge/actions/workflows/main.yml)
+
 # 🤖️ Skynet
 
 Cutting grass never felt so easy 🫢️
@@ -8,7 +10,7 @@ In order to run this application, a valid JDK 21 version must be present in your
 
 Use [SDKMAN!](https://sdkman.io/) to install the Eclipse Temurin JDK:
 ```
-sdk install java 21.0.3-tem
+sdk install java 21.0.4-tem
 ```
 
 ### 🏃🏻‍♂️ Run the application
