@@ -29,7 +29,7 @@ testing {
 
             dependencies {
                 implementation("org.mockito:mockito-core:5.14.2")
-                implementation("org.mockito:mockito-junit-jupiter:5.14.2")
+                implementation("org.mockito:mockito-junit-jupiter:5.16.0")
             }
         }
 
