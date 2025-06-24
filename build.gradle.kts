@@ -17,7 +17,7 @@ java {
 }
 
 dependencies {
-    implementation("com.google.inject:guice:7.0.0")
+    implementation("io.insert-koin:koin-core:4.1.0")
 
     testImplementation(kotlin("test"))
 }
@@ -36,7 +36,8 @@ testing {
         val e2e by registering(JvmTestSuite::class) {
             dependencies {
                 implementation(project())
-                implementation("com.google.inject:guice:7.0.0")
+                implementation("io.insert-koin:koin-core:4.1.0")
+                implementation("io.insert-koin:koin-test:4.1.0")
             }
 
             targets {

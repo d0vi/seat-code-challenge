@@ -1,18 +1,18 @@
 package seat.code
 
-import com.google.inject.Guice
-import jakarta.inject.Inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
+import org.koin.core.context.startKoin
 import seat.code.application.ConfigureSurfaceUseCase
 import seat.code.application.RunMowersUseCase
 import seat.code.application.ShowMowersPositionUseCase
-import seat.code.infrastructure.framework.configuration.RepositoryModule
-import seat.code.infrastructure.framework.configuration.UseCaseModule
+import seat.code.infrastructure.framework.configuration.repositoryModule
+import seat.code.infrastructure.framework.configuration.useCaseModule
 
-class Application @Inject constructor(
-    val configureSurface: ConfigureSurfaceUseCase,
-    val runMowers: RunMowersUseCase,
-    val showMowersPosition: ShowMowersPositionUseCase
-) {
+class Application : KoinComponent {
+    private val configureSurface: ConfigureSurfaceUseCase by inject()
+    private val runMowers: RunMowersUseCase by inject()
+    private val showMowersPosition: ShowMowersPositionUseCase by inject()
 
     fun bootstrap() {
         // first, we set up our surface area and our mowers in their respective positions
@@ -25,8 +25,10 @@ class Application @Inject constructor(
 }
 
 fun main() {
-    val injector = Guice.createInjector(RepositoryModule(), UseCaseModule())
-    val app = injector.getInstance(Application::class.java)
-
+    startKoin {
+        modules(repositoryModule, useCaseModule)
+    }
+    
+    val app = Application()
     app.bootstrap()
 }

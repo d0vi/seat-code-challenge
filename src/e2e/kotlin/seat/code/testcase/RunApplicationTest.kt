@@ -1,29 +1,33 @@
 package seat.code.testcase
 
-import com.google.inject.Guice
-import com.google.inject.Injector
-import jakarta.inject.Inject
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.koin.core.context.startKoin
+import org.koin.core.context.stopKoin
+import org.koin.test.KoinTest
+import org.koin.test.inject
 import seat.code.application.ConfigureSurfaceUseCase
 import seat.code.application.RunMowersUseCase
-import seat.code.infrastructure.framework.configuration.RepositoryModule
-import seat.code.infrastructure.framework.configuration.UseCaseModule
+import seat.code.infrastructure.framework.configuration.repositoryModule
+import seat.code.infrastructure.framework.configuration.useCaseModule
 
-class RunApplicationTest {
+class RunApplicationTest : KoinTest {
 
-    private val injector: Injector = Guice.createInjector(RepositoryModule(), UseCaseModule())
-
-    @Inject
-    private lateinit var configureSurface: ConfigureSurfaceUseCase
-
-    @Inject
-    private lateinit var runMowers: RunMowersUseCase
+    private val configureSurface: ConfigureSurfaceUseCase by inject()
+    private val runMowers: RunMowersUseCase by inject()
 
     @BeforeEach
     fun beforeEach() {
-        injector.injectMembers(this)
+        startKoin {
+            modules(repositoryModule, useCaseModule)
+        }
+    }
+
+    @AfterEach
+    fun afterEach() {
+        stopKoin()
     }
 
     @Test

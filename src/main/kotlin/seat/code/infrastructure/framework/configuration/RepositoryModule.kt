@@ -1,7 +1,6 @@
 package seat.code.infrastructure.framework.configuration
 
-import com.google.inject.AbstractModule
-import com.google.inject.Provides
+import org.koin.dsl.module
 import seat.code.domain.repository.surface.SurfaceRepository
 import seat.code.infrastructure.adapter.driven.persistence.surface.FileSurfaceRepository
 import seat.code.infrastructure.adapter.driven.persistence.surface.reader.FileConfiguration
@@ -10,23 +9,18 @@ import seat.code.infrastructure.adapter.driven.persistence.surface.reader.InputC
 import java.nio.file.Path
 import java.util.Properties
 
-class RepositoryModule : AbstractModule() {
+val repositoryModule = module {
 
-    @Provides
-    fun provideSurfaceRepository(fileReader: FileReader): SurfaceRepository = FileSurfaceRepository(fileReader)
+    single<SurfaceRepository> { FileSurfaceRepository(get()) }
 
-    @Provides
-    fun provideFileReader(fileConfiguration: FileConfiguration, validator: InputCommandValidator): FileReader =
-        FileReader(fileConfiguration, validator)
+    single { FileReader(get(), get()) }
 
-    @Provides
-    fun provideFileConfiguration(): FileConfiguration {
+    single {
         val properties = Properties()
-        properties.load(this.javaClass.getResourceAsStream("/application.properties"))
+        properties.load(this::class.java.getResourceAsStream("/application.properties"))
         val file = properties.getProperty("config.file")
-        return FileConfiguration(file, Path.of(file))
+        FileConfiguration(file, Path.of(file))
     }
 
-    @Provides
-    fun provideInputValidator(): InputCommandValidator = InputCommandValidator()
+    single { InputCommandValidator() }
 }
