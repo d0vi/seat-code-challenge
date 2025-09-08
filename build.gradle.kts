@@ -17,7 +17,7 @@ java {
 }
 
 dependencies {
-    implementation("io.insert-koin:koin-core:4.1.0")
+    implementation("io.insert-koin:koin-core:4.1.1")
 
     testImplementation(kotlin("test"))
 }
@@ -36,8 +36,8 @@ testing {
         val e2e by registering(JvmTestSuite::class) {
             dependencies {
                 implementation(project())
-                implementation("io.insert-koin:koin-core:4.1.0")
-                implementation("io.insert-koin:koin-test:4.1.0")
+                implementation("io.insert-koin:koin-core:4.1.1")
+                implementation("io.insert-koin:koin-test:4.1.1")
             }
 
             targets {
