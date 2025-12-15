@@ -28,8 +28,8 @@ testing {
             useJUnitJupiter()
 
             dependencies {
-                implementation("org.mockito:mockito-core:5.20.0")
-                implementation("org.mockito:mockito-junit-jupiter:5.20.0")
+                implementation("org.mockito:mockito-core:5.21.0")
+                implementation("org.mockito:mockito-junit-jupiter:5.21.0")
             }
         }
 
