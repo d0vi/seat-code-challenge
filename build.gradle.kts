@@ -24,7 +24,7 @@ dependencies {
 
 testing {
     suites {
-        val test by getting(JvmTestSuite::class) {
+        val test = getByName<JvmTestSuite>("test") {
             useJUnitJupiter()
 
             dependencies {
@@ -33,7 +33,7 @@ testing {
             }
         }
 
-        val e2e by registering(JvmTestSuite::class) {
+        val e2e = register<JvmTestSuite>("e2e") {
             dependencies {
                 implementation(project())
                 implementation("io.insert-koin:koin-core:4.2.2")
